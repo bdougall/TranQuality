@@ -3,7 +3,7 @@
 ## Table of Contents  
 - [Overview](#overview)  
 - [Presentation of Findings](#presentation)
-- [dataset_creation](#dataset-creation)
+- [Dataset_Creation](#dataset-creation)
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
@@ -14,7 +14,7 @@ To see a high level overview of our findings from this project, please go to the
 ## Dataset Creation <a name="dataset-creation"></a>
 #### `paraphrase_wo_pb_dataset_creation.ipynb`
 
-Concatenates the Hindi, Tamil, and Malayalam training datasets from the Amrita paraphrase corpus to form 1 training data set, shuffling the training data so that multiple languages are present in each trainng batch. Randomly split the records in each of the Hindi, Tamil, and Malayalam test datasets into half, uses half of each language's test data to form 1 validation dataset, and uses the other half of each language's test dataset for the test dataset used to test paraphrase model final performance.
+Concatenates the Hindi, Tamil, and Malayalam training datasets from the Amrita paraphrase corpus to form 1 training data set, shuffling the training data so that multiple languages are present in each training batch. Randomly split the records in each of the Hindi, Tamil, and Malayalam test datasets into half, uses half of each language's test data to form 1 validation dataset, and uses the other half of each language's test dataset for the test dataset used to test paraphrase model final performance.
 
 #### `paraphrase_w_pb_dataset_creation.ipynb`
 
