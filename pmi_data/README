@@ -1,0 +1,18 @@
+This is the train, dev and test set data for the Indic Languages Task in WAT 2021. The languages involved are:
+Bengali (bn), English (en), Gujarati (gu), Hindi (hi), Kannada (kn), Malayalam (ml), Marathi (mr), Oriya (or), Punjabi (pa), Tamil (ta) and Telugu (te).
+
+The development and test sets are n-way parallel consisting of 1000 and 2390 lines respectively. They are selected from the PMI dataset.
+This enables the evaluation between 110 translation directions but in WAT we will only evaluate translation to and from English.
+
+The train sets come from several sources such as: PMI, PIB, MKB, ALT, JW, Wikimatrix, Tanzil, Ted2020, Bibleuedin, Opensubtitles2018, Iitb and Odiencorp2.0.
+Not all sources contain training data for all language pairs.
+We have filtered the training data to eliminate overlaps with the development set so please use the splits in this repo if you plan to use our test sets.
+
+The folder structure is:
+
+dev/dev.LANG [Where LANG is any of the aforementioned languages]
+test/test.LANG [Where LANG is any of the aforementioned languages]
+train/SOURCE/en-LANG/train.{en,LANG} [Where SOURCE is one of the aforementioned sources and LANG is any of the aforementioned languages]
+
+Before using any other parallel corpus please contact the task organizers: Raj Dabre (prajdabre@gmail.com) and Anoop Kunchukuttan (anoop.kunchukuttan@gmail.com).
+
