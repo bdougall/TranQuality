@@ -3,7 +3,7 @@
 ## Table of Contents  
 - [Overview](#overview)  
 - [Presentation of Findings](#presentation)
-- [Dataset_Creation](#dataset-creation)
+- [Dataset Creation](#dataset-creation)
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
