@@ -4,6 +4,9 @@
 - [Overview](#overview)  
 - [Presentation of Findings](#presentation)
 - [Dataset Creation](#dataset-creation)
+- [Siamese Models](#siamese-models)
+    - [Model Notebooks](#siamese-model-notebooks)
+    - [Model Weights and Bias Checkpoints](#siamese-w-b)    
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
@@ -19,3 +22,34 @@ Concatenates the Hindi, Tamil, and Malayalam training datasets from the Amrita p
 #### `paraphrase_w_pb_dataset_creation.ipynb`
 
 Takes the Punjabi training and test datasets from the Amrita paraphrase corpus to create Punjabi training, validation, and test datasets, using the same procedure as in `paraphrase_wo_pb_dataset_creation.ipynb` to create the Punjabi validation and test datasets. Add the Punjabi training, validation, and test datasets to a copy of the paraphrase train, validation, and test datasets. Reshuffle the paraphrase training data so that the added Punjabi records are distributed throughout.
+
+## Siamese Models <a name="siamese-models"></a>
+### Model Notebooks <a name="siamese-model-notebooks"></a>
+#### `layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`
+
+The best-performing Siamese neural network model, trained on Punjabi in addition to all of our languages of interest (Hindi, Tamil, and Malayalam).
+
+#### `layernorm_3dense_w_Pb_sep_models.ipynb`
+
+An experiment creating two separate models, an Aryan-only model (trained on Hindi and Punjabi) and a Dravidian-only model (trained on Tamil and Malayalam). This notebook shows that accuracy is diminished for predicting the labels of Dravidian languages in a Dravidian-only model.
+
+#### `layernorm_woPb_Siamese_BCELogitLoss.ipynb`
+
+The original Siamese neural network model, trained on only our languages of interest (Hindi, Tamil, and Malayalam). This notebook shows slightly lower accuracy rates for Tamil and Malayalam compared to the model also trained on Punjabi (`layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`)
+
+### Model Weights and Bias Checkpoints <a name="siamese-w-b"></a>
+#### `aryan_model_layernorm.pt`
+
+The Aryan-only model created in `layernorm_3dense_w_Pb_sep_models.ipynb`.
+
+#### `drav_model_layernorm.pt`
+
+The Dravidian-only model created in `layernorm_3dense_w_Pb_sep_models.ipynb`.
+
+#### `three_dense_model_wopb_layernorm.pt`
+
+The original model (not trained on Punjabi), created in `layernorm_woPb_Siamese_BCELogitLoss.ipynb`.
+
+#### `three_dense_w_punjabi_model_layernorm.pt`
+
+The best-performing model (trained on Punjabi in addition to Hindi, Tamil, and Malayalam), created in `layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`.
