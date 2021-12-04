@@ -6,7 +6,8 @@
 - [Dataset Creation](#dataset-creation)
 - [Siamese Models](#siamese-models)
     - [Model Notebooks](#siamese-model-notebooks)
-    - [Model Weights and Bias Checkpoints](#siamese-w-b)    
+    - [Model Weights and Bias Checkpoints](#siamese-w-b)
+    - [Best Siamese Evaluation](#best-siamese-eval)    
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
@@ -53,3 +54,24 @@ The original model (not trained on Punjabi), created in `layernorm_woPb_Siamese_
 #### `three_dense_w_punjabi_model_layernorm.pt`
 
 The best-performing model (trained on Punjabi in addition to Hindi, Tamil, and Malayalam), created in `layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`.
+
+### Best Siamese Evaluation <a name="best-siamese-eval"></a>
+#### `layernorm_choose_best_record.ipynb`
+
+Finds the best-translation (IndicTrans vs MBart) for each target translation in each language (Hindi, Tamil, and Malayalam), as measured by a higher probability of paraphrase score. This notebook also contains the language-specific SacreBleu scores on the ensemble corpus obtained by filtering the translations for each target record to only retain the one with the highest paraphrase probability score.
+
+#### `layernorm_final_record_quality_eval.ipynb`
+
+Explores the cosine similarity between translation and target and edit distance between translation and target text for each language in our record-filtered corpus, as well as the solo translator translations.
+
+### `layernorm_model_mistakes.ipynb`
+
+Explores classification mistakes that the best-performing Siamese model made on the Amrita paraphrase test set created in `paraphrase_w_pb_dataset_creation.ipynb`.
+
+### `layernorm_siamese_bart_evaluation.ipynb`
+
+Assigns a paraphrase probability score to each record for each language in the corpus of MBart translations. In this notebook, we also find the cosine similarity score between each MBart record and its target text and calculate the rate of translations considered `not paraphrases of the target text (NP)`.
+
+### `layernorm_siamese_indictrans_evaluation.ipynb`
+
+Assigns a paraphrase probability score to each record for each language in the corpus of IndicTrans translations. In this notebook, we also find the cosine similarity score between each IndicTrans record and its target text and calculate the rate of translations considered `not paraphrases of the target text (NP)`.
