@@ -13,7 +13,7 @@
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
 
 ## Presentation of Findings <a name="presentation"></a>
-To see a high level overview of our findings from this project, please go to the [Google Slides Presentation](https://docs.google.com/presentation/d/1DtTs9N8rKzuyIbOM5BIr9Fj5rrlIxkeOUFAeWmrXhq4/edit?usp=sharing).
+To see a high level overview of our findings from this project, please go to the [Google Slides Presentation](https://docs.google.com/presentation/d/1DtTs9N8rKzuyIbOM5BIr9Fj5rrlIxkeOUFAeWmrXhq4/edit?usp=sharing). A pdf copy with speaker notes is also included in this repo as `W266_TranQuality-presentation.pdf`.
 
 ## Dataset Creation <a name="dataset-creation"></a>
 #### `paraphrase_wo_pb_dataset_creation.ipynb`
