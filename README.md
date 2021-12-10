@@ -46,4 +46,4 @@ Computes accuracy and loss on the deduplicated paraphrase validation and test se
 * `bestsnn_indictrans_trans_eval.ipynb`: assigns a paraphrase probability to each IndicTrans translation using the best SNN
 
 ## Translations_and_sacrebleu <a name="trans_sacrebleu"></a>
-Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text.
+Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text; computes SacreBleu scores for the IndicBERT selected records.
