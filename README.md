@@ -4,10 +4,12 @@
 - [Overview](#overview)  
 - [Presentation of Findings](#presentation)
 - [Dataset Creation](#dataset-creation)
+- [IndicBert_cos_edit_eval](#indicbert_cos_edit)
 - [Siamese Models](#siamese-models)
     - [Model Notebooks](#siamese-model-notebooks)
     - [Model Weights and Bias Checkpoints](#siamese-w-b)
-    - [Best Siamese Evaluation](#best-siamese-eval)    
+    - [Best Siamese Evaluation](#best-siamese-eval)
+- [Translations_and_sacrebleu](#trans_sacrebleu)    
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
@@ -19,6 +21,9 @@ To see a high level overview of our findings from this project, please go to the
 * `paraphrase_wo_pb_dataset_creation.ipynb`: creates multilingual paraphrase training, validation, and test sets without Punjabi records
 * `paraphrase_w_pb_dataset_creation.ipynb`: updates the previously created paraphrase training, validation, and test sets by adding Punjabi records
 * `deduplicate_val_test.ipynb`: reforms the paraphrase validation and test sets after the existence of duplicate records were found
+
+## IndicBert_cos_edit_eval <a name="indicbert_cos_edit"></a>
+Calculates the character edit distances and cosine similarity scores for each translator's translations and the ensemble corpus created by the individual IndicBERT models; analyzes trends in these metrics, translator chosen, and paraphrase probability scores by language.
 
 ## Siamese Models <a name="siamese-models"></a>
 ### Model Notebooks <a name="siamese-model-notebooks"></a>
@@ -35,3 +40,6 @@ Contains the weights and biases for the SNN models created in `Model Notebooks`.
 * `bestsnn_model_mistakes.ipynb`: analysis of best SNN model mistakes on paraphrase test set
 * `bestsnn_mbart_trans_eval.ipynb`: assigns a paraphrase probability score to each MBART translation using the best SNN
 * `bestsnn_indictrans_trans_eval.ipynb`: assigns a paraphrase probability to each IndicTrans translation using the best SNN
+
+### Translations_and_sacrebleu <a name="trans_sacrebleu"></a>
+Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text.
