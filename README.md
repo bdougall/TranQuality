@@ -8,6 +8,7 @@
 - [Siamese Models](#siamese-models)
     - [Model Notebooks](#siamese-model-notebooks)
     - [Model Weights and Bias Checkpoints](#siamese-w-b)
+    - [Dedup_snn_eval](#dedup-eval)
     - [Best Siamese Evaluation](#best-siamese-eval)
 - [Translations_and_sacrebleu](#trans_sacrebleu)    
 
@@ -34,8 +35,11 @@ Calculates the character edit distances and cosine similarity scores for each tr
 ### Model Weights and Bias Checkpoints <a name="siamese-w-b"></a>
 Contains the weights and biases for the SNN models created in `Model Notebooks`.
 
+### Dedup_snn_eval <a name="dedup-eval"></a>
+Computes accuracy and loss on the deduplicated paraphrase validation and test sets for each model created in `Model Notebooks`.
+
 ### Best Siamese Evaluation <a name="best-siamese-eval"></a>
-* `bestsnn_choose_best_record.ipynb`: finds the best-translation (IndicTrans vs MBart) for each target translation in each language (Hindi, Tamil, and Malayalam), as measured by the highest paraphrase probability assigned by the best SNN model; calculates language-specific SacreBleu scores on the ensemble corpus
+* `bestsnn_choose_best_record.ipynb`: finds the best-translation (IndicTrans vs MBART) for each Hindi, Tamil, and Malayalam target translation, as measured by the highest paraphrase probability assigned by the best SNN model; calculates language-specific SacreBleu scores on the ensemble corpus
 * `bestsnn_ensembletranslator_eval.ipynb`: explores the cosine similarity between translation and target and edit distance between translation and target text for each language in our record-filtered corpus, as well as the solo-translator translations.
 * `bestsnn_model_mistakes.ipynb`: analysis of best SNN model mistakes on paraphrase test set
 * `bestsnn_mbart_trans_eval.ipynb`: assigns a paraphrase probability score to each MBART translation using the best SNN
