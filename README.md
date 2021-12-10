@@ -16,63 +16,22 @@ In our project, we implement paraphrase-matching to evaluate the translation qua
 To see a high level overview of our findings from this project, please go to the [Google Slides Presentation](https://docs.google.com/presentation/d/1DtTs9N8rKzuyIbOM5BIr9Fj5rrlIxkeOUFAeWmrXhq4/edit?usp=sharing). A pdf copy with speaker notes is also included in this repo as `W266_TranQuality-presentation.pdf`.
 
 ## Dataset Creation <a name="dataset-creation"></a>
-* `paraphrase_wo_pb_dataset_creation.ipynb`: creates multilingual (w/o Pb) paraphrase training, validation, and test sets
-#### `paraphrase_wo_pb_dataset_creation.ipynb`
-
-Concatenates the Hindi, Tamil, and Malayalam training datasets from the Amrita paraphrase corpus to form 1 training data set, shuffling the training data so that multiple languages are present in each training batch. Randomly split the records in each of the Hindi, Tamil, and Malayalam test datasets into half, uses half of each language's test data to form 1 validation dataset, and uses the other half of each language's test dataset for the test dataset used to test paraphrase model final performance.
-
-#### `paraphrase_w_pb_dataset_creation.ipynb`
-
-Takes the Punjabi training and test datasets from the Amrita paraphrase corpus to create Punjabi training, validation, and test datasets, using the same procedure as in `paraphrase_wo_pb_dataset_creation.ipynb` to create the Punjabi validation and test datasets. Add the Punjabi training, validation, and test datasets to a copy of the paraphrase train, validation, and test datasets. Reshuffle the paraphrase training data so that the added Punjabi records are distributed throughout.
+* `paraphrase_wo_pb_dataset_creation.ipynb`: creates multilingual paraphrase training, validation, and test sets without Punjabi records
+* `paraphrase_w_pb_dataset_creation.ipynb`: updates the previously created paraphrase training, validation, and test sets by adding Punjabi records
+* `deduplicate_val_test.ipynb`: reforms the paraphrase validation and test sets after the existence of duplicate records were found
 
 ## Siamese Models <a name="siamese-models"></a>
 ### Model Notebooks <a name="siamese-model-notebooks"></a>
-#### `layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`
-
-The best-performing Siamese neural network model, trained on Punjabi in addition to all of our languages of interest (Hindi, Tamil, and Malayalam).
-
-#### `layernorm_3dense_w_Pb_sep_models.ipynb`
-
-An experiment creating two separate models, an Aryan-only model (trained on Hindi and Punjabi) and a Dravidian-only model (trained on Tamil and Malayalam). This notebook shows that accuracy is diminished for predicting the labels of Dravidian languages in a Dravidian-only model.
-
-#### `layernorm_woPb_Siamese_BCELogitLoss.ipynb`
-
-The original Siamese neural network model, trained on only our languages of interest (Hindi, Tamil, and Malayalam). This notebook shows slightly lower accuracy rates for Tamil and Malayalam compared to the model also trained on Punjabi (`layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`)
+* `bestsnn_Pb.ipynb`: the best performing SNN, trained on Hindi, Tamil, Malayalam, and Punjabi
+* `snn_w_Pb_sep_models.ipynb`: create an Aryan-only model (Hindi and Punjabi) and a Dravidian-only model (Tamil and Malayalam); shows diminished Dravidian language accuracy
+* `snn_woPb.ipynb`: the original SNN, trained on only Hindi, Tamil, and Malayalam
 
 ### Model Weights and Bias Checkpoints <a name="siamese-w-b"></a>
-#### `aryan_model_layernorm.pt`
-
-The Aryan-only model created in `layernorm_3dense_w_Pb_sep_models.ipynb`.
-
-#### `drav_model_layernorm.pt`
-
-The Dravidian-only model created in `layernorm_3dense_w_Pb_sep_models.ipynb`.
-
-#### `three_dense_model_wopb_layernorm.pt`
-
-The original model (not trained on Punjabi), created in `layernorm_woPb_Siamese_BCELogitLoss.ipynb`.
-
-#### `three_dense_w_punjabi_model_layernorm.pt`
-
-The best-performing model (trained on Punjabi in addition to Hindi, Tamil, and Malayalam), created in `layernorm_3dense_Pb_Siamese_BCELogitLoss.ipynb`.
+Contains the weights and biases for the SNN models created in `Model Notebooks`.
 
 ### Best Siamese Evaluation <a name="best-siamese-eval"></a>
-#### `layernorm_choose_best_record.ipynb`
-
-Finds the best-translation (IndicTrans vs MBart) for each target translation in each language (Hindi, Tamil, and Malayalam), as measured by a higher probability of paraphrase score. This notebook also contains the language-specific SacreBleu scores on the ensemble corpus obtained by filtering the translations for each target record to only retain the one with the highest paraphrase probability score.
-
-#### `layernorm_final_record_quality_eval.ipynb`
-
-Explores the cosine similarity between translation and target and edit distance between translation and target text for each language in our record-filtered corpus, as well as the solo translator translations.
-
-### `layernorm_model_mistakes.ipynb`
-
-Explores classification mistakes that the best-performing Siamese model made on the Amrita paraphrase test set created in `paraphrase_w_pb_dataset_creation.ipynb`.
-
-### `layernorm_siamese_bart_evaluation.ipynb`
-
-Assigns a paraphrase probability score to each record for each language in the corpus of MBart translations. In this notebook, we also find the cosine similarity score between each MBart record and its target text and calculate the rate of translations considered `not paraphrases of the target text (NP)`.
-
-### `layernorm_siamese_indictrans_evaluation.ipynb`
-
-Assigns a paraphrase probability score to each record for each language in the corpus of IndicTrans translations. In this notebook, we also find the cosine similarity score between each IndicTrans record and its target text and calculate the rate of translations considered `not paraphrases of the target text (NP)`.
+* `bestsnn_choose_best_record.ipynb`: finds the best-translation (IndicTrans vs MBart) for each target translation in each language (Hindi, Tamil, and Malayalam), as measured by the highest paraphrase probability assigned by the best SNN model; calculates language-specific SacreBleu scores on the ensemble corpus
+* `bestsnn_ensembletranslator_eval.ipynb`: explores the cosine similarity between translation and target and edit distance between translation and target text for each language in our record-filtered corpus, as well as the solo-translator translations.
+* `bestsnn_model_mistakes.ipynb`: analysis of best SNN model mistakes on paraphrase test set
+* `bestsnn_mbart_trans_eval.ipynb`: assigns a paraphrase probability score to each MBART translation using the best SNN
+* `bestsnn_indictrans_trans_eval.ipynb`: assigns a paraphrase probability to each IndicTrans translation using the best SNN
