@@ -1,4 +1,4 @@
-# W266_Project
+# Fine tuning IndicBERT
 
 ## Table of Contents  
 - [Overview](#overview)  
@@ -12,8 +12,8 @@
     - [Best Siamese Evaluation](#best-siamese-eval)
 - [Translations_and_sacrebleu](#trans_sacrebleu)    
 
-## Overview <a name="overview"></a>
-In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
+## Fine tuning - Search for the best model <a name="Model Exploration"></a>
+This is coed in the notebook `1. finetune_paraphrase.ipynb <a name='finetuning_indicBERT/1. finetune_paraphrase.ipynb'>`. Here we will be looking for the best model in the hyperpameter space.
 
 ## Presentation of Findings <a name="presentation"></a>
 To see a high level overview of our findings from this project, please go to the [Google Slides Presentation](https://docs.google.com/presentation/d/1DtTs9N8rKzuyIbOM5BIr9Fj5rrlIxkeOUFAeWmrXhq4/edit?usp=sharing). A pdf copy with speaker notes is also included in this repo as `W266_TranQuality-presentation.pdf`.
