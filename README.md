@@ -1,4 +1,4 @@
-# W266_Project
+# TranQuality
 
 ## Table of Contents  
 - [Overview](#overview)  
