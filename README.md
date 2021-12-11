@@ -10,7 +10,11 @@
     - [Model Weights and Bias Checkpoints](#siamese-w-b)
     - [Dedup_snn_eval](#dedup-eval)
     - [Best Siamese Evaluation](#best-siamese-eval)
+- [Fine tuning IndicBERT Models](#finetune)
 - [Translations_and_sacrebleu](#trans_sacrebleu)    
+
+
+
 
 ## Overview <a name="overview"></a>
 In our project, we implement paraphrase-matching to evaluate the translation qualities produced by two transformers (IndicTrans and MBart). We seek to determine if filtering records by the resultant paraphrase scores results in a corpus of improved translation quality.
@@ -44,6 +48,9 @@ Computes accuracy and loss on the deduplicated paraphrase validation and test se
 * `bestsnn_model_mistakes.ipynb`: analysis of best SNN model mistakes on paraphrase test set
 * `bestsnn_mbart_trans_eval.ipynb`: assigns a paraphrase probability score to each MBART translation using the best SNN
 * `bestsnn_indictrans_trans_eval.ipynb`: assigns a paraphrase probability to each IndicTrans translation using the best SNN
+
+## Fine tuning IndicBERT Models <a name="finetune"></a>
+Everything related to fine tuning IndicBERT models are in the subfolder [finetuning_indicBERT](finetuning_indicBERT). A detailed markdown is available in the subfolder that describes the contents.
 
 ## Translations_and_sacrebleu <a name="trans_sacrebleu"></a>
 Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text; computes SacreBleu scores for the IndicBERT selected records.
