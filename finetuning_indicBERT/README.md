@@ -26,15 +26,13 @@
 ## 3. Score and save the logits <a name="score"></a>
 ### Tamil <a name="tamil"></a>
 [`3a. scoring-and-saving-logits-tamil.ipynb`](3a.%20scoring-and-saving-logits-tamil.ipynb) : 
-This note book has 6 main steps:
+This note book has 5 main steps:
 
 * Load the checkpoint
 * Score the file created by mBART by translating english to tamil
 * Score the file created by IndicTrans by translating english to tamil
 * Combine the logits from step 2, step 3, with the original sentence and the translated senences. This is also saved for further analysis
 * Apply softmax on the logits from step 2 and 3, resulting in selecting the better translations
-* Compute sacrebleu on the a. mBART translations with reference to original b. IndicTrans translations with reference to original c. selected translations with reference to original
-* If our hypothesis worked, we should have sacreblue from step 6c better than 6a or 6b
 
 ### Hindi <a name="hindi"></a>
 Same as 3a but for Hindi
