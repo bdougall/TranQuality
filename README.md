@@ -35,6 +35,7 @@ Calculates the character edit distances and cosine similarity scores for each tr
 * `bestsnn_Pb.ipynb`: the best performing SNN, trained on Hindi, Tamil, Malayalam, and Punjabi
 * `snn_w_Pb_sep_models.ipynb`: create an Aryan-only model (Hindi and Punjabi) and a Dravidian-only model (Tamil and Malayalam); shows diminished Dravidian language accuracy
 * `snn_woPb.ipynb`: the original SNN, trained on only Hindi, Tamil, and Malayalam
+* `scheduler_3dense_w_Punjabi_Siamese_BCE_Loss_PyTorch.ipynb`: an SNN trained with scheduler step and a higher initial learning rate with higher validation and test loss
 
 ### Model Weights and Bias Checkpoints <a name="siamese-w-b"></a>
 Contains the weights and biases for the SNN models created in `Model Notebooks`.
