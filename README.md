@@ -27,6 +27,7 @@ To see a high level overview of our findings from this project, please go to the
 * `paraphrase_wo_pb_dataset_creation.ipynb`: creates multilingual paraphrase training, validation, and test sets without Punjabi records
 * `paraphrase_w_pb_dataset_creation.ipynb`: updates the previously created paraphrase training, validation, and test sets by adding Punjabi records
 * `deduplicate_val_test.ipynb`: reforms the paraphrase validation and test sets after the existence of duplicate records were found
+The notebook used to parse the Amrita paraphrase training and test datasets, `dpil_parser.ipynb` is saved in the fine-tuning IndicBERT subdirectory, as it also contains the code used to create the IndicBERT test files.
 
 ## IndicBert_cos_edit_eval <a name="indicbert_cos_edit"></a>
 Calculates the character edit distances and cosine similarity scores for each translator's translations and the ensemble corpus created by the individual IndicBERT models; analyzes trends in these metrics, translator chosen, and paraphrase probability scores by language.
