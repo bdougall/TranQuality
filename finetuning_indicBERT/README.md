@@ -17,7 +17,7 @@
   
 
 ## 1. Fine tuning - Search for the best model <a name="Model-Exploration"></a>
-[`1. finetune_paraphrase.ipynb`](1.%20finetune_paraphrase.ipynb) : Train a bunch of models in the hyperpameter space.
+[`1. finetune_paraphrase.ipynb`](1.%20finetune_paraphrase.ipynb) : Search the hyperpameter space and train multiple models.
 
 ## 2. Find the best model <a name="Find-the-best-model"></a>
 [`2. best-models.ipynb`](2.%20best-models.ipynb) : List the best model from the hyper parameter space for each language.
