@@ -33,7 +33,7 @@ This note book has 6 main steps:
 * Score the file created by IndicTrans by translating english to tamil
 * Combine the logits from step 2, step 3, with the original sentence and the translated senences. This is also saved for further analysis
 * Apply softmax on the logits from step 2 and 3, resulting in selecting the better translations
-* Run sacreblue on the a. mBART translations with reference to original b. IndicTrans translations with reference to original c. selected translations with reference to original
+* Compute sacrebleu on the a. mBART translations with reference to original b. IndicTrans translations with reference to original c. selected translations with reference to original
 * If our hypothesis worked, we should have sacreblue from step 6c better than 6a or 6b
 
 ### Hindi <a name="hindi"></a>
@@ -57,7 +57,7 @@ This is where we build the final model and save the checkpoints
 
 
 ## 5. Error analysis <a name="error"></a>
-In these notebook we will explore where the model is misclassifying and provide some thematic reasons for them. We will not delve into detailed scientific analysis though. It for the next chapter of this project ;)
+In these notebook we will explore where the model is misclassifying and provide some thematic reasons for them. We will not delve into detailed scientific analysis though but save it for the next chapter of this project.
 
 ### Tamil <a name="5tamil"></a>
 [`5a.error-analysis-ta.ipynb`](5a.error-analysis-ta.ipynb)
