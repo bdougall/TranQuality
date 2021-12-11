@@ -11,7 +11,8 @@
     - [Dedup_snn_eval](#dedup-eval)
     - [Best Siamese Evaluation](#best-siamese-eval)
 - [Fine tuning IndicBERT Models](#finetune)
-- [Translations_and_sacrebleu](#trans_sacrebleu)    
+- [Translations_and_sacrebleu](#trans_sacrebleu)
+- [PMI_Data](#pmi)    
 
 
 
@@ -55,3 +56,6 @@ Everything related to fine tuning IndicBERT models are in the subfolder [finetun
 
 ## Translations_and_sacrebleu <a name="trans_sacrebleu"></a>
 Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text; computes SacreBleu scores for the IndicBERT selected records.
+
+## PMI_Data <a name="pmi"></a>
+Contains the PMIndia dev dataset from the WAT 2021 8th workshop on machine translation.
