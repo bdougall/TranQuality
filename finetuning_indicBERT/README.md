@@ -1,49 +1,71 @@
 # Fine tuning IndicBERT
 
 ## Table of Contents  
-- [Overview](#overview)  
-- [Presentation of Findings](#presentation)
-- [Dataset Creation](#dataset-creation)
-- [IndicBert_cos_edit_eval](#indicbert_cos_edit)
-- [Siamese Models](#siamese-models)
-    - [Model Notebooks](#siamese-model-notebooks)
-    - [Model Weights and Bias Checkpoints](#siamese-w-b)
-    - [Dedup_snn_eval](#dedup-eval)
-    - [Best Siamese Evaluation](#best-siamese-eval)
-- [Translations_and_sacrebleu](#trans_sacrebleu)    
+- [1. Fine tuning - Search for the best model](#Model-Exploration)  
+- [2. Find the best model ](#Find-the-best-model)
+- [3. Score and save the logits](#score)
+    - [Tamil](#tamil)
+    - [Hindi](#hindi) 
+    - [Malayalam](#malayalam) 
+- [4. Final model](#final)
+    - [Tamil](#4tamil)
+    - [Hindi](#4hindi) 
+    - [Malayalam](#4malayalam)
+- [5. Error analysis](#error)
+    - [Tamil](#5tamil)
+    - [Hindi](#5hindi) 
+  
 
-## Fine tuning - Search for the best model <a name="Model Exploration"></a>
-This is coed in the notebook `1. finetune_paraphrase.ipynb <a name='finetuning_indicBERT/1. finetune_paraphrase.ipynb'>`. Here we will be looking for the best model in the hyperpameter space.
+## 1. Fine tuning - Search for the best model <a name="Model-Exploration"></a>
+[`1. finetune_paraphrase.ipynb`](1.%20finetune_paraphrase.ipynb) : Train a bunch of models in the hyperpameter space.
 
-## Presentation of Findings <a name="presentation"></a>
-To see a high level overview of our findings from this project, please go to the [Google Slides Presentation](https://docs.google.com/presentation/d/1DtTs9N8rKzuyIbOM5BIr9Fj5rrlIxkeOUFAeWmrXhq4/edit?usp=sharing). A pdf copy with speaker notes is also included in this repo as `W266_TranQuality-presentation.pdf`.
+## 2. Find the best model <a name="Find-the-best-model"></a>
+[`2. best-models.ipynb`](2.%20best-models.ipynb) : List the best model from the hyper parameter space for each language.
 
-## Dataset Creation <a name="dataset-creation"></a>
-* `paraphrase_wo_pb_dataset_creation.ipynb`: creates multilingual paraphrase training, validation, and test sets without Punjabi records
-* `paraphrase_w_pb_dataset_creation.ipynb`: updates the previously created paraphrase training, validation, and test sets by adding Punjabi records
-* `deduplicate_val_test.ipynb`: reforms the paraphrase validation and test sets after the existence of duplicate records were found
 
-## IndicBert_cos_edit_eval <a name="indicbert_cos_edit"></a>
-Calculates the character edit distances and cosine similarity scores for each translator's translations and the ensemble corpus created by the individual IndicBERT models; analyzes trends in these metrics, translator chosen, and paraphrase probability scores by language.
+## 3. Score and save the logits <a name="score"></a>
+### Tamil <a name="tamil"></a>
+[`3a. scoring-and-saving-logits-tamil.ipynb`](3a.%20scoring-and-saving-logits-tamil.ipynb) : 
+This note book has 6 main steps:
 
-## Siamese Models <a name="siamese-models"></a>
-### Model Notebooks <a name="siamese-model-notebooks"></a>
-* `bestsnn_Pb.ipynb`: the best performing SNN, trained on Hindi, Tamil, Malayalam, and Punjabi
-* `snn_w_Pb_sep_models.ipynb`: create an Aryan-only model (Hindi and Punjabi) and a Dravidian-only model (Tamil and Malayalam); shows diminished Dravidian language accuracy
-* `snn_woPb.ipynb`: the original SNN, trained on only Hindi, Tamil, and Malayalam
+* Load the checkpoint
+* Score the file created by mBART by translating english to tamil
+* Score the file created by IndicTrans by translating english to tamil
+* Combine the logits from step 2, step 3, with the original sentence and the translated senences. This is also saved for further analysis
+* Apply softmax on the logits from step 2 and 3, resulting in selecting the better translations
+* Run sacreblue on the a. mBART translations with reference to original b. IndicTrans translations with reference to original c. selected translations with reference to original
+* If our hypothesis worked, we should have sacreblue from step 6c better than 6a or 6b
 
-### Model Weights and Bias Checkpoints <a name="siamese-w-b"></a>
-Contains the weights and biases for the SNN models created in `Model Notebooks`.
+### Hindi <a name="hindi"></a>
+Same as 3a but for Hindi
+[`3b. scoring-and-saving-logits-hindi.ipynb`](3b.%20scoring-and-saving-logits-hindi.ipynb) 
 
-### Dedup_snn_eval <a name="dedup-eval"></a>
-Computes accuracy and loss on the deduplicated paraphrase validation and test sets for each model created in `Model Notebooks`.
+### Malayalam <a name="malayalam"></a>
+Same as 3a but for Malayalam
+[`3c. scoring-and-saving-logits-malayalam.ipynb`](3c.%20scoring-and-saving-logits-malayalam.ipynb) 
 
-### Best Siamese Evaluation <a name="best-siamese-eval"></a>
-* `bestsnn_choose_best_record.ipynb`: finds the best-translation (IndicTrans vs MBART) for each Hindi, Tamil, and Malayalam target translation, as measured by the highest paraphrase probability assigned by the best SNN model; calculates language-specific SacreBleu scores on the ensemble corpus
-* `bestsnn_ensembletranslator_eval.ipynb`: explores the cosine similarity between translation and target and edit distance between translation and target text for each language in our record-filtered corpus, as well as the solo-translator translations.
-* `bestsnn_model_mistakes.ipynb`: analysis of best SNN model mistakes on paraphrase test set
-* `bestsnn_mbart_trans_eval.ipynb`: assigns a paraphrase probability score to each MBART translation using the best SNN
-* `bestsnn_indictrans_trans_eval.ipynb`: assigns a paraphrase probability to each IndicTrans translation using the best SNN
+## 4. Final model <a name="final"></a> 
+This is where we build the final model and save the checkpoints
+### Tamil <a name="4tamil"></a>
+[`4a. final-model-ta.ipynb`](4a.%20final-model-ta.ipynb)
 
-## Translations_and_sacrebleu <a name="trans_sacrebleu"></a>
-Contains the scripts for creating the MBART and IndicTrans translations and calculating their SacreBleu scores compared to the target text; computes SacreBleu scores for the IndicBERT selected records.
+### Hindi <a name="4hindi"></a>
+[`4b. final-model-hi.ipynb`](4b.%20final-model-hi.ipynb)
+
+### Malayalam <a name="4malayalam"></a>
+[`4c. final-model-ma.ipynb`](4c.%20final-model-ma.ipynb)
+
+
+## 5. Error analysis <a name="error"></a>
+In these notebook we will explore where the model is misclassifying and provide some thematic reasons for them. We will not delve into detailed scientific analysis though. It for the next chapter of this project ;)
+
+### Tamil <a name="5tamil"></a>
+[`5a.error-analysis-ta.ipynb`](5a.error-analysis-ta.ipynb)
+
+### Hindi <a name="5hindi"></a>
+[`5b.error-analysis-hi.ipynb`](5b.error-analysis-hi.ipynb)
+
+
+
+
+The checkpoints and other output files can be found [here](https://drive.google.com/drive/folders/1rm0M1_W_WtV51RiV6SiAoqBrAJxSrRYa)
